@@ -1,6 +1,50 @@
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;800&display=swap');
+
+
+* {
+  font-family: 'Rubik', sans-serif;
+}
+
+:root {
+  --background: #EFF2F7;
+  --dark-blue: #282451;
+  --tetris-blue: #A7DDF2;
+  --tetris-pink: #F2A0D5;
+  --tetris-green: #AEF2B9;
+  --tetris-yellow: #F2D57E;
+  --tetris-purple: #BDC0F2;
+  --size: 42px;
+  --hl-pink: #F869C5;
+  --sd-pink: #FFEDF9;
+  --hl-green: #0E771F;
+  --hl-yellow: #775900;
+  --hl-purple: #2E3269;
+  --piece-size: clamp(18px, 2vw, 30px);
+  --grid-height: calc(var(--piece-size) * 20);
+  --grid-width: calc(var(--piece-size) * 10);
+  --preview-grid-size: calc(var(--piece-size) * 4);
+  --piece-border-radius: clamp(4px, 0.5vw, 6px);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    background-color: var(--background);
+    color: var(--dark-blue);
+    position: relative;
+}
+
+.title {
+  font-size: clamp(18px, 1.3vw, 22px);
+  font-weight: 700;
+  margin: 0;
 }

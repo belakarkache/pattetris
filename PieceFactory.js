@@ -1,9 +1,9 @@
-class TetrominoFactory {
+class PieceFactory {
   constructor(width) {
     this.width = width;
   }
 
-  createLTetromino() {
+  createLPiece() {
     return [
       [1, this.width + 1, this.width * 2 + 1, 2],
       [this.width, this.width + 1, this.width + 2, this.width * 2 + 2],
@@ -12,7 +12,7 @@ class TetrominoFactory {
     ];
   }
 
-  createZTetromino() {
+  createZPiece() {
     return [
       [0, this.width, this.width + 1, this.width * 2 + 1],
       [this.width + 1, this.width + 2, this.width * 2, this.width * 2 + 1],
@@ -21,7 +21,7 @@ class TetrominoFactory {
     ];
   }
 
-  createTTetromino() {
+  createTPiece() {
     return [
       [1, this.width, this.width + 1, this.width + 2],
       [1, this.width + 1, this.width + 2, this.width * 2 + 1],
@@ -30,7 +30,7 @@ class TetrominoFactory {
     ];
   }
 
-  createOTetromino() {
+  createOPiece() {
     return [
       [0, 1, this.width, this.width + 1],
       [0, 1, this.width, this.width + 1],
@@ -39,7 +39,7 @@ class TetrominoFactory {
     ];
   }
 
-  createITetromino() {
+  createIPiece() {
     return [
       [1, this.width + 1, this.width * 2 + 1, this.width * 3 + 1],
       [this.width, this.width + 1, this.width + 2, this.width + 3],
@@ -48,22 +48,22 @@ class TetrominoFactory {
     ];
   }
 
-  createTetromino(type) {
+  createPiece(type) {
     switch (type) {
       case "l":
-        return this.createLTetromino();
+        return this.createLPiece();
       case "z":
-        return this.createZTetromino();
+        return this.createZPiece();
       case "t":
-        return this.createTTetromino();
+        return this.createTPiece();
       case "o":
-        return this.createOTetromino();
+        return this.createOPiece();
       case "i":
-        return this.createITetromino();
+        return this.createIPiece();
       default:
         return [];
     }
   }
 }
 
-export default TetrominoFactory;
+export default PieceFactory;
