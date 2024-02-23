@@ -44,7 +44,7 @@
       </p>
 
       <p class="content-subtitle">Benefícios</p>
-      <ul class="content-benefits">
+      <ul class="content-list">
         <li
           v-for="benefit in fullContent.benefits"
           :key="benefit"
@@ -56,23 +56,84 @@
           />
           <div
             v-html="benefit"
-            class="benefit-text"
+            class="list-text"
           />
         </li>
       </ul>
 
       <p class="content-subtitle">Exemplo em Javascript</p>
+      <iframe
+        v-if="fullContent.iframeUrl"
+        width="100%"
+        height="300"
+        :src="fullContent.iframeUrl"
+        frameborder="0"
+      ></iframe>
 
-      <div
-        v-for="(step, index) in fullContent.steps"
-        :key="index"
+      <p class="content-subtitle">Desvantagens</p>
+      <ul class="content-list">
+        <li
+          v-for="disadvantage in fullContent.disadvantages"
+          :key="disadvantage"
+        >
+          <img
+            src="@/assets/content-icons/warning.svg"
+            height="20"
+            width="20"
+          />
+          <div
+            v-html="disadvantage"
+            class="list-text"
+          />
+        </li>
+      </ul>
+
+      <p class="content-subtitle">Ideias de uso</p>
+      <ul class="content-list">
+        <li
+          v-for="useCase in fullContent.useCasesExamples"
+          :key="useCase"
+        >
+          <img
+            src="@/assets/content-icons/bulb.svg"
+            height="20"
+            width="20"
+          />
+          <div
+            v-html="useCase"
+            class="list-text"
+          />
+        </li>
+      </ul>
+
+      <p
+        class="content-subtitle content-subtitle--references"
+        v-if="fullContent.references && fullContent.references.length > 0"
       >
-        <span>{{ step.instruction }}</span>
-
-        <pre>
-          {{ step.code }}
-        </pre>
-      </div>
+        Referências
+      </p>
+      <ul
+        class="content-list"
+        v-if="fullContent.references && fullContent.references.length > 0"
+      >
+        <li
+          v-for="reference in fullContent.references"
+          :key="reference.name"
+        >
+          <a
+            :href="reference.url"
+            target="_blank"
+            class="list-text list-text--references"
+          >
+            <img
+              src="@/assets/content-icons/link.svg"
+              height="12"
+              width="12"
+            />
+            {{ reference.name }}
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -166,30 +227,44 @@ export default {
         font-size: 18px;
         margin-bottom: 8px;
         margin-top: 40px;
+        &--references {
+          font-size: 14px;
+        }
       }
 
       &-description {
         font-size: 16px;
       }
 
-      &-benefits {
+      &-list {
         list-style: none;
         padding: 0;
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
 
-        .benefit-text {
+        .list-text {
           strong {
             font-weight: 500;
+          }
+
+          &--references {
+            font-size: 12px;
           }
         }
 
         li {
           display: flex;
-          align-items: center;
           gap: 8px;
+
+          a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--dark-blue);
+            text-decoration: none;
+          }
         }
       }
     }
