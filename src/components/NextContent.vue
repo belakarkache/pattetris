@@ -41,7 +41,7 @@ export default {
     padding-top: 4px;
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: $tablet) {
     top: 12%;
     bottom: unset;
     border-bottom-left-radius: 30px;

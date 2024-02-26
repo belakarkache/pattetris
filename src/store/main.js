@@ -8,8 +8,12 @@ export const useMainStore = defineStore("main", {
     content: localStorage.getItem("content") || 0,
     maxScore: localStorage.getItem("maxScore") || 0,
     linesToNextLevel: 2,
+    isGameRunning: false,
   }),
   actions: {
+    toggleGameRunning(status) {
+      this.isGameRunning = status;
+    },
     incrementLevel() {
       this.level++;
     },

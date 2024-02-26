@@ -1,8 +1,9 @@
 <template>
   <button
-    :style="{ color: textColor, background: bgColor }"
-    class="button"
+    :style="{ background: bgColor }"
+    class="button shadow"
     :disabled="disabled"
+    @click="triggerAnimation"
   >
     {{ text }}
   </button>
@@ -14,10 +15,6 @@ export default {
     text: {
       type: String,
       default: "Button",
-    },
-    textColor: {
-      type: String,
-      default: "var(--hl-green)",
     },
     bgColor: {
       type: String,
@@ -33,7 +30,7 @@ export default {
 <style lang="scss">
 button {
   all: unset;
-  padding: 12px 26px;
+  padding: 16px 28px;
   font-weight: 600;
   font-size: clamp(12px, 1.3vw, 18px);
   text-transform: uppercase;
@@ -43,9 +40,11 @@ button {
   align-items: center;
   cursor: pointer;
   transition: 0.2s ease all;
+  color: rgba(0, 0, 0, 0.55);
 
   &:active {
     transform: scale(0.96);
+    box-shadow: none;
   }
 
   &:disabled {
@@ -54,8 +53,8 @@ button {
     user-select: none;
   }
 
-  @media (max-width: 1280px) {
-    padding: 10px 22px;
+  @media (max-width: $tablet) {
+    padding: 12px 24px;
   }
 }
 </style>

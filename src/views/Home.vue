@@ -34,12 +34,12 @@ main {
   padding-right: var(--size);
   justify-content: center;
 
-  @media (max-width: 1280px) {
+  @media (max-width: $tablet) {
     padding: calc(var(--size) / 2);
     justify-content: center;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: $mobile) {
     padding: 10px;
     flex-direction: column;
   }

@@ -1,9 +1,9 @@
 <template>
   <div class="game-board-header">
     <div class="game-board-header__text">
-      <h2 class="title">Nível {{ store.level || "--" }}</h2>
+      <h2 class="title">Nível {{ store.level }}</h2>
       <span class="progress-helper"
-        >{{ store.lines }}/{{ maxLinesNeeded }} linhas</span
+        >{{ progress }}% para nível {{ store.level + 1 }}</span
       >
     </div>
     <ProgressBar :progress="progress" />
@@ -21,7 +21,6 @@ export default {
     return {
       store: useMainStore(),
       progress: 0,
-      maxLinesNeeded: 2,
     };
   },
   watch: {
@@ -31,12 +30,8 @@ export default {
       },
       deep: true,
     },
-    "store.level": {
-      handler() {
-        this.maxLinesNeeded = this.store.lines + this.store.linesToNextLevel;
-      },
-    },
   },
+
   methods: {
     updateProgress(value) {
       if (value % this.store.linesToNextLevel === 0) {
@@ -72,7 +67,7 @@ export default {
     display: block;
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: $tablet) {
     max-width: 200px;
   }
 }

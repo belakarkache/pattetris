@@ -72,7 +72,6 @@ export default {
   gap: calc(var(--size) + 20px);
   overflow-y: auto;
   overflow-x: hidden;
-  justify-content: center;
 
   .content-grid {
     display: flex;
@@ -138,8 +137,8 @@ export default {
       gap: 6px;
       user-select: none;
 
-      .lock-icon {
-        &:hover {
+      &:hover {
+        .lock-icon {
           -webkit-animation: wobble 0.8s both;
           animation: wobble 0.8s both;
         }
@@ -147,8 +146,7 @@ export default {
     }
   }
 
-  @media (max-width: 1280px) {
-    margin-top: 70px;
+  @media (max-width: $tablet) {
     justify-content: flex-start;
 
     .content-wrapper {

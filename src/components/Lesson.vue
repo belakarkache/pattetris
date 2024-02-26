@@ -166,13 +166,10 @@ export default {
 <style lang="scss">
 .lesson {
   background: white;
-  width: 65%;
+  width: 70%;
   overflow-x: hidden;
   overflow-y: scroll;
   flex-direction: column;
-  height: 95vh;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
   margin: 0 auto;
 
   &__breadcrumb {
@@ -270,8 +267,7 @@ export default {
     }
   }
 
-  @media (max-width: 1280px) {
-    padding-top: 70px;
+  @media (max-width: $tablet) {
     width: 85%;
 
     &__content {
@@ -284,7 +280,7 @@ export default {
       }
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: $mobile) {
     width: 100%;
     &__content {
       padding: 30px;
