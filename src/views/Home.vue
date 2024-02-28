@@ -4,22 +4,22 @@
 
     <NextContent v-if="store.content < 10" />
 
-    <Toast
-      v-if="isToastOpen"
-      :show="isToastOpen"
-    >
+    <Toast :show="isToastOpen">
       <Vue3Lottie
         :animationData="Medal"
         :width="60"
         :height="60"
         :loop="1"
         :autoplay="true"
+        :speed="1.2"
         @on-complete="() => (isToastOpen = false)"
       />
 
       <div class="toast-text">
         <p class="toast-text--small">Novo conteúdo liberado!</p>
-        <p class="toast-text--large">{{ contents[store.content - 1].title }}</p>
+        <p class="toast-text--large">
+          {{ contents[store.content - 1].title }}
+        </p>
       </div>
 
       <Button
@@ -85,25 +85,6 @@ main {
   @media (max-width: $mobile) {
     padding: 10px;
     flex-direction: column;
-  }
-
-  .toast {
-    .toast-text {
-      color: var(--dark-blue);
-      &--small {
-        font-size: 14px;
-        font-weight: 400;
-      }
-
-      &--large {
-        font-size: 22px;
-        font-weight: 600;
-      }
-    }
-
-    .button {
-      padding: 12px 22px;
-    }
   }
 }
 </style>

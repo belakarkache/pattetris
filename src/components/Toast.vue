@@ -1,16 +1,19 @@
 <template>
-  <transition name="slide">
-    <div
-      class="toast"
-      :class="{ 'is-active': show }"
-    >
-      <div class="border-rainbow rainbow">
-        <div class="toast-content">
-          <slot></slot>
+  <Teleport to="body">
+    <TransitionGroup name="toast">
+      <div
+        v-if="show"
+        class="toast"
+        :class="{ 'is-active': show }"
+      >
+        <div class="border-rainbow rainbow">
+          <div class="toast-content">
+            <slot></slot>
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
+    </TransitionGroup>
+  </Teleport>
 </template>
 
 <script>
@@ -26,14 +29,23 @@ export default {
 </script>
 
 <style lang="scss">
+.toast-enter-from,
+.toast-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: 0.25s ease-in-out all;
+}
+
 .toast {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 10;
   border-radius: 30px;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
   pointer-events: none;
   overflow: hidden;
 
@@ -52,21 +64,27 @@ export default {
     display: flex;
     align-items: center;
     gap: 20px;
+    color: var(--dark-blue);
+    .toast-text {
+      color: var(--dark-blue);
+      &--small {
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      &--large {
+        font-size: 22px;
+        font-weight: 600;
+      }
+    }
+
+    .button {
+      padding: 12px 22px;
+    }
   }
 
   &.is-active {
-    opacity: 1;
     pointer-events: auto;
   }
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.5s;
-}
-
-.slide-enter,
-.slide-leave-to {
-  transform: translateY(-100%);
 }
 </style>

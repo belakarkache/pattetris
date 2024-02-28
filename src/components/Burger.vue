@@ -1,118 +1,71 @@
 <template>
-  <div class="hamburger">
-    <input
-      class="checkbox"
-      type="checkbox"
-      v-model="isOpen"
-      name="burger-menu"
-    />
-    <svg
-      fill="none"
-      viewBox="0 0 50 50"
-      height="28"
-      width="28"
-    >
-      <path
-        class="lineTop line"
-        stroke-linecap="round"
-        stroke-width="4"
-        stroke="black"
-        d="M6 11L44 11"
-      ></path>
-      <path
-        stroke-linecap="round"
-        stroke-width="4"
-        stroke="black"
-        d="M6 24H43"
-        class="lineMid line"
-      ></path>
-      <path
-        stroke-linecap="round"
-        stroke-width="4"
-        stroke="black"
-        d="M6 37H43"
-        class="lineBottom line"
-      ></path>
-    </svg>
+  <div
+    class="hamburguer-button"
+    :class="{ 'hamburguer-button--active': status }"
+  >
+    <div class="hamburguer-button__line"></div>
+    <div class="hamburguer-button__line"></div>
+    <div class="hamburguer-button__line"></div>
   </div>
 </template>
 <script>
 export default {
   name: "Burger",
   props: {
-    status: Boolean,
-  },
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
-  watch: {
-    isOpen() {
-      this.$emit("toggle", this.isOpen);
+    status: {
+      type: Boolean,
+      default: false,
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-.hamburger {
-  height: 28px;
-  width: 28px;
-  transform: 0.2s;
-  position: relative;
 
-  @media (min-width: $tablet) {
-    display: none;
+<style lang="scss" scoped>
+.hamburguer-button {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  cursor: pointer;
+
+  &__line {
+    width: 100%;
+    height: 4px;
+    background: var(--dark-blue);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s;
+    border-radius: 4px;
+
+    &:nth-child(1) {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:nth-child(3) {
+      bottom: 0;
+    }
   }
 
-  .checkbox {
-    position: absolute;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-
-    &:checked + svg {
-      .line {
-        stroke: var(--hl-pink);
+  &--active {
+    .hamburguer-button__line {
+      &:nth-child(1) {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
       }
 
-      .lineTop {
-        stroke-dashoffset: 0;
-        transform-origin: left;
-        transform: rotateZ(45deg) translate(-7px, -5px);
+      &:nth-child(2) {
+        opacity: 0;
       }
 
-      .lineMid {
-        stroke-dashoffset: 40;
-      }
-
-      .lineBottom {
-        stroke-dashoffset: 0;
-        transform-origin: left;
-        transform: rotateZ(-45deg) translate(-5px, 5px);
+      &:nth-child(3) {
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
       }
     }
   }
-}
-
-.line {
-  transition: 0.5s;
-  stroke-width: 6px;
-  stroke: var(--dark-blue);
-}
-
-.lineTop {
-  stroke-dasharray: 40 40;
-  stroke-dashoffset: 25;
-}
-
-.lineBottom {
-  stroke-dasharray: 40 40;
-  stroke-dashoffset: 60;
-}
-
-.lineMid {
-  stroke-dasharray: 40 40;
 }
 </style>

@@ -8,7 +8,11 @@
       />
     </router-link>
 
-    <Burger @toggle="isMenuOpen = !isMenuOpen" />
+    <Burger
+      @click="isMenuOpen = !isMenuOpen"
+      :status="isMenuOpen"
+      v-if="$matches.medium.max"
+    />
 
     <ul
       class="sidebar__links"
