@@ -88,8 +88,8 @@
 
 <script>
 import PieceFactory from "../../PieceFactory.js";
-import Confetti from "@/assets/confetti.json";
-import LevelUp from "@/assets/levelup.json";
+import Confetti from "@/assets/animations/confetti.json";
+import LevelUp from "@/assets/animations/levelup.json";
 import Button from "./Button.vue";
 import { useMainStore } from "@/store/main";
 import GameOver from "./GameOver.vue";
@@ -208,14 +208,18 @@ export default {
       });
     },
     control(e) {
-      if (e.keyCode === 37 && this.timerId) {
-        this.moveLeft();
-      } else if (e.keyCode === 38 && this.timerId) {
-        this.rotate();
-      } else if (e.keyCode === 39 && this.timerId) {
-        this.moveRight();
-      } else if (e.keyCode === 40 && this.timerId) {
-        this.moveDown();
+      if (this.timerId && this.store.isGameRunning) {
+        if (e.keyCode === 37) {
+          this.moveLeft();
+        } else if (e.keyCode === 38) {
+          this.rotate();
+        } else if (e.keyCode === 39) {
+          this.moveRight();
+        } else if (e.keyCode === 40) {
+          this.moveDown();
+        } else if (e.keyCode === 32) {
+          this.hardDrop();
+        }
       }
     },
     moveDown() {
@@ -440,6 +444,18 @@ export default {
         clearInterval(this.timerId);
       }
     },
+    hardDrop() {
+      while (
+        !this.current.some((index) =>
+          this.squares[
+            this.currentPosition + index + this.width
+          ].classList.contains("filled")
+        )
+      ) {
+        this.moveDown();
+      }
+      this.freeze();
+    },
   },
   beforeDestroy() {
     document.removeEventListener("keydown", this.control);
@@ -549,6 +565,7 @@ export default {
 .preview-text {
   font-size: 12px;
   margin-top: 0;
+  margin-bottom: 12px;
 }
 
 .preview-grid {

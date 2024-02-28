@@ -36,7 +36,7 @@
 <script>
 import Sidebar from "@/components/Sidebar.vue";
 import GameBoard from "@/components/GameBoard.vue";
-import Sad from "@/assets/sad.json";
+import Sad from "@/assets/animations/sad.json";
 
 export default {
   name: "Home",

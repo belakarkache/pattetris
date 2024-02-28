@@ -34,8 +34,8 @@
 </template>
 <script>
 import Button from "./Button.vue";
-import Highscore from "@/assets/highscore.json";
-import GameOver from "@/assets/gameover.json";
+import Highscore from "@/assets/animations/highscore.json";
+import GameOver from "@/assets/animations/gameover.json";
 import { useMainStore } from "@/store/main";
 
 export default {
