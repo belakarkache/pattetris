@@ -2,7 +2,7 @@
   <main>
     <GameBoard />
 
-    <NextContent v-if="store.content < 10" />
+    <!-- <NextContent v-if="store.content < 10" /> -->
 
     <Toast :show="isToastOpen">
       <Vue3Lottie
@@ -33,19 +33,20 @@
 
 <script>
 import GameBoard from "@/components/GameBoard.vue";
-import NextContent from "@/components/NextContent.vue";
+// import NextContent from "@/components/NextContent.vue";
 import Toast from "@/components/Toast.vue";
 import { useMainStore } from "@/store/main";
 import { useContentStore } from "@/store/content";
 import PinkConfetti from "@/assets/animations/pink-confetti.json";
 import Medal from "@/assets/animations/medal.json";
 import Button from "@/components/Button.vue";
+import unlockedContentSound from "@/assets/sounds/unlocked-content.mp3";
 
 export default {
   name: "Home",
   components: {
     GameBoard,
-    NextContent,
+    // NextContent,
     Toast,
     Button,
   },
@@ -56,11 +57,14 @@ export default {
       Medal,
       isToastOpen: false,
       contents: useContentStore().contents,
+      audio: new Audio(unlockedContentSound),
     };
   },
   watch: {
     "store.content"(newVal, oldVal) {
       if (newVal > oldVal) {
+        this.audio.volume = 0.5;
+        this.audio.play();
         this.isToastOpen = true;
       }
     },
@@ -79,12 +83,17 @@ main {
 
   @media (max-width: $tablet) {
     padding: calc(var(--size) / 2);
-    justify-content: center;
   }
 
   @media (max-width: $mobile) {
     padding: 10px;
+    padding-top: var(--size);
     flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: $special-mobile) {
+    padding: 20px;
   }
 }
 </style>

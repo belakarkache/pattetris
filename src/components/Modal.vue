@@ -26,6 +26,7 @@ export default {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(4px);
+  z-index: 100;
 }
 
 .modal-content {

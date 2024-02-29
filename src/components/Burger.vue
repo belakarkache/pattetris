@@ -26,7 +26,6 @@ export default {
   height: 22px;
   position: relative;
   cursor: pointer;
-
   &__line {
     width: 100%;
     height: 4px;

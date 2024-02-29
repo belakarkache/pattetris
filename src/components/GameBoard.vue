@@ -25,6 +25,7 @@
           ></div>
         </div>
       </div>
+
       <GameStats />
 
       <div class="actions">
@@ -55,7 +56,7 @@
       v-if="store.isGameRunning && $matches.medium.max"
     >
       <MobileControls
-        @top="rotate()"
+        @tap="rotate()"
         @left="moveLeft()"
         @right="moveRight()"
         @bottom="moveDown()"
@@ -98,6 +99,9 @@ import GameStats from "./GameStats.vue";
 import MobileControls from "./MobileControls.vue";
 import Modal from "./Modal.vue";
 import { Vue3Lottie } from "vue3-lottie";
+import popSound from "@/assets/sounds/pop.mp3";
+import scoreSound from "@/assets/sounds/score.mp3";
+import blockSound from "@/assets/sounds/block.mp3";
 
 export default {
   components: {
@@ -194,6 +198,11 @@ export default {
     );
   },
   methods: {
+    playSound(file) {
+      const audio = new Audio(file);
+      audio.volume = 0.2;
+      audio.play();
+    },
     draw() {
       this.current.forEach((index) => {
         this.squares[this.currentPosition + index].classList.add("piece");
@@ -261,6 +270,7 @@ export default {
         this.current = this.thePieces[this.random][this.currentRotation];
         this.currentPosition = 4;
         this.addScore();
+        this.playSound(blockSound);
         this.draw();
         this.previewShape();
         this.gameOver();
@@ -328,8 +338,8 @@ export default {
         }
       }
     },
-
     rotate() {
+      this.playSound(popSound);
       this.undraw();
       this.currentRotation++;
       if (this.currentRotation === this.current.length) {
@@ -396,9 +406,9 @@ export default {
         if (
           row.every((index) => this.squares[index].classList.contains("filled"))
         ) {
+          this.playSound(scoreSound);
           this.store.incrementScore();
           this.store.incrementLines();
-
           this.$refs.confetti.play();
 
           if (this.store.lines % this.store.linesToNextLevel === 0) {
@@ -515,6 +525,11 @@ export default {
       max-width: 95px;
     }
   }
+
+  @media (max-width: $special-mobile) {
+    background: transparent;
+    padding: 0;
+  }
 }
 
 .grid {
@@ -530,6 +545,11 @@ export default {
     box-sizing: border-box;
     background: var(--background);
     border-radius: var(--piece-border-radius);
+
+    @media (max-width: $special-mobile) {
+      border-color: var(--background);
+      background: white;
+    }
   }
 }
 

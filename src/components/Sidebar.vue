@@ -11,7 +11,7 @@
     <Burger
       @click="isMenuOpen = !isMenuOpen"
       :status="isMenuOpen"
-      v-if="$matches.medium.max"
+      v-if="$matches.medium.max && !store.isGameRunning"
     />
 
     <ul

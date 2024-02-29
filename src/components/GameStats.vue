@@ -75,6 +75,10 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    @media (max-width: $mobile) {
+      gap: 6px;
+    }
   }
 
   .stat {
@@ -98,6 +102,15 @@ export default {
           margin: 0;
           font-size: clamp(10px, 0.8vw, 14px);
         }
+      }
+
+      @media (max-width: $mobile) {
+        background-color: var(--background);
+        border-radius: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+        max-width: 55px;
       }
     }
 
