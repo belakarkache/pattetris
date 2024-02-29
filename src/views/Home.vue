@@ -86,14 +86,9 @@ main {
   }
 
   @media (max-width: $mobile) {
-    padding: 10px;
-    padding-top: var(--size);
+    padding: 20px;
     flex-direction: column;
     justify-content: flex-start;
-  }
-
-  @media (max-width: $special-mobile) {
-    padding: 20px;
   }
 }
 </style>

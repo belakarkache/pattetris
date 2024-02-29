@@ -67,6 +67,16 @@ export default {
       store: useMainStore(),
     };
   },
+  computed: {
+    text() {
+      return {
+        lines: "linhas completas",
+        maxScore: "pontuação máxima",
+        score: "pontuação atual",
+        content: "conteúdos liberados",
+      };
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -78,6 +88,8 @@ export default {
 
     @media (max-width: $mobile) {
       gap: 6px;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 

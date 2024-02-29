@@ -1,54 +1,51 @@
 <template>
   <div class="container">
-    <div class="main-col">
-      <GameBoardHeader />
-      <div class="grid">
+    <GameBoardHeader class="game-board-header" />
+
+    <div class="grid">
+      <div
+        v-for="(cell, index) in grid"
+        :key="index"
+        :class="{
+          filled: cell.filled,
+          'filled--hidden': index >= 200 && index <= 209,
+        }"
+      />
+    </div>
+
+    <div class="preview">
+      <p class="preview-text">Próxima peça:</p>
+      <div class="preview-grid">
         <div
-          v-for="(cell, index) in grid"
+          v-for="(cell, index) in miniGrid"
           :key="index"
-          :class="{
-            filled: cell.filled,
-            'filled--hidden': index >= 200 && index <= 209,
-          }"
+          :class="{ piece: cell.piece }"
         ></div>
       </div>
     </div>
 
-    <div class="aux-col">
-      <div v-show="hasStarted">
-        <p class="preview-text">Próxima peça:</p>
-        <div class="preview-grid">
-          <div
-            v-for="(cell, index) in miniGrid"
-            :key="index"
-            :class="{ piece: cell.piece }"
-          ></div>
-        </div>
-      </div>
+    <GameStats class="game-stats" />
 
-      <GameStats />
-
-      <div class="actions">
-        <Button
-          text="Jogar"
-          @click="startGame"
-          v-if="!store.isGameRunning && !gamePaused"
-        />
-        <Button
-          text="Reiniciar"
-          @click="restartGame"
-          textColor="var(--hl-yellow)"
-          bgColor="var(--tetris-yellow)"
-          v-else
-        />
-        <Button
-          :text="gamePaused ? 'Continuar' : 'Pausar'"
-          @click="pauseGame"
-          v-if="hasStarted"
-          textColor="var(--hl-purple)"
-          bgColor="var(--tetris-purple)"
-        />
-      </div>
+    <div class="actions">
+      <Button
+        text="Jogar"
+        @click="startGame"
+        v-if="!store.isGameRunning && !gamePaused"
+      />
+      <Button
+        text="Reiniciar"
+        @click="restartGame"
+        textColor="var(--hl-yellow)"
+        bgColor="var(--tetris-yellow)"
+        v-else
+      />
+      <Button
+        :text="gamePaused ? 'Continuar' : 'Pausar'"
+        @click="pauseGame"
+        v-if="hasStarted"
+        textColor="var(--hl-purple)"
+        bgColor="var(--tetris-purple)"
+      />
     </div>
 
     <Teleport
@@ -491,16 +488,20 @@ export default {
   }
 }
 
+.game-board-header {
+  grid-area: game-board-header;
+}
+
 .container {
   position: relative;
-  display: flex;
   background: white;
   padding: var(--size);
   border-radius: 20px;
   height: fit-content;
-  flex-wrap: wrap;
   width: fit-content;
-  gap: var(--size);
+  gap: calc(var(--size) / 2);
+  display: grid;
+  grid-template-areas: "game-board-header preview" "grid preview" "grid stats" "grid stats" "grid actions";
 
   @media (max-width: $tablet) {
     padding: calc(var(--size) / 2);
@@ -514,25 +515,23 @@ export default {
 
   @media (max-width: $mobile) {
     padding: 16px;
-    gap: 8px;
+    gap: 12px;
+    grid-template-areas: "game-board-header game-board-header" "stats stats" "grid actions" "grid preview";
+    width: 100%;
 
     .board-animation {
       left: 16px;
       bottom: 16px;
     }
-
-    .aux-col {
-      max-width: 95px;
-    }
   }
 
-  @media (max-width: $special-mobile) {
-    background: transparent;
+  @media (max-width: $mobile) {
     padding: 0;
   }
 }
 
 .grid {
+  grid-area: grid;
   width: var(--grid-width);
   height: var(--grid-height);
   display: flex;
@@ -545,31 +544,26 @@ export default {
     box-sizing: border-box;
     background: var(--background);
     border-radius: var(--piece-border-radius);
-
-    @media (max-width: $special-mobile) {
-      border-color: var(--background);
-      background: white;
-    }
   }
 }
 
-.aux-col {
+.actions {
+  grid-area: actions;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eff2f7;
 
-  .actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #eff2f7;
-
-    @media (max-width: $tablet) {
-      z-index: 4;
-    }
+  @media (max-width: $tablet) {
+    z-index: 4;
   }
+}
+
+.game-stats {
+  grid-area: stats;
+  width: 100%;
 }
 
 .piece {
@@ -582,25 +576,29 @@ export default {
     inset 2px -2px 0px rgba(0, 0, 0, 0.1);
 }
 
-.preview-text {
-  font-size: 12px;
-  margin-top: 0;
-  margin-bottom: 12px;
-}
+.preview {
+  grid-area: preview;
+  .preview-text {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    opacity: 0.5;
+  }
 
-.preview-grid {
-  width: var(--preview-grid-size);
-  height: var(--preview-grid-size);
-  display: flex;
-  flex-wrap: wrap;
-
-  div {
-    height: var(--piece-size);
-    width: var(--piece-size);
-    border: 1px solid white;
-    box-sizing: border-box;
-    background: none;
-    border-radius: var(--piece-border-radius);
+  .preview-grid {
+    width: var(--preview-grid-size);
+    height: var(--preview-grid-size);
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: preview-grid;
+    div {
+      height: var(--piece-size);
+      width: var(--piece-size);
+      border: 1px solid white;
+      box-sizing: border-box;
+      background: none;
+      border-radius: var(--piece-border-radius);
+    }
   }
 }
 

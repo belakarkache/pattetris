@@ -47,10 +47,8 @@ export default {
 <style lang="scss">
 .game-board-header {
   width: 100%;
-  max-width: 300px;
   display: flex;
   flex-direction: column;
-  margin-bottom: calc(var(--size) / 2);
 
   &__text {
     display: flex;
@@ -65,10 +63,6 @@ export default {
     opacity: 0.5;
     float: right;
     display: block;
-  }
-
-  @media (max-width: $tablet) {
-    max-width: 200px;
   }
 }
 </style>
