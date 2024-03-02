@@ -171,12 +171,17 @@ export default {
   overflow-y: scroll;
   flex-direction: column;
   margin: 0 auto;
+  position: relative;
 
   &__breadcrumb {
+    position: sticky;
+    top: 0;
+    background-color: white;
     display: flex;
     align-items: center;
     gap: 8px;
     padding: calc(var(--size) / 2);
+    z-index: 2;
     a {
       text-decoration: none;
     }

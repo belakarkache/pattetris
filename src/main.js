@@ -4,7 +4,6 @@ import App from "./App.vue";
 import router from "../router";
 import { createPinia } from "pinia";
 import Vue3Lottie from "vue3-lottie";
-import Vue3TouchEvents from "vue3-touch-events";
 import { VueResponsiveness } from "vue-responsiveness";
 
 createApp(App)
@@ -16,5 +15,4 @@ createApp(App)
     large: 1024,
   })
   .use(Vue3Lottie)
-  .use(Vue3TouchEvents)
   .mount("#app");
