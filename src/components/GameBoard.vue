@@ -14,7 +14,12 @@
     </div>
 
     <div class="preview">
-      <p class="preview-text">Próxima peça:</p>
+      <p
+        class="preview-text"
+        v-show="hasStarted"
+      >
+        Próxima peça:
+      </p>
       <div class="preview-grid">
         <div
           v-for="(cell, index) in miniGrid"
@@ -27,25 +32,49 @@
     <GameStats class="game-stats" />
 
     <div class="actions">
+      <GameSettings />
+
       <Button
-        text="Jogar"
+        :text="$matches.small.max ? '' : 'Jogar'"
         @click="startGame"
         v-if="!store.isGameRunning && !gamePaused"
-      />
+        data-location="container"
+        :hasIcon="$matches.small.max"
+      >
+        <IconPlay
+          v-if="$matches.small.max"
+          :size="22"
+          color="rgba(0,0,0,0.7)"
+        />
+      </Button>
       <Button
-        text="Reiniciar"
+        :text="$matches.small.max ? '' : 'Reiniciar'"
         @click="restartGame"
         textColor="var(--hl-yellow)"
         bgColor="var(--tetris-yellow)"
+        :hasIcon="$matches.small.max"
         v-else
-      />
+      >
+        <IconRestart
+          v-if="$matches.small.max"
+          :size="22"
+          color="rgba(0,0,0,0.7)"
+        />
+      </Button>
       <Button
-        :text="gamePaused ? 'Continuar' : 'Pausar'"
+        :text="$matches.small.max ? '' : 'Pausar'"
         @click="pauseGame"
         v-if="hasStarted"
         textColor="var(--hl-purple)"
         bgColor="var(--tetris-purple)"
-      />
+        :hasIcon="$matches.small.max"
+      >
+        <IconPause
+          v-if="$matches.small.max"
+          :size="22"
+          color="rgba(0,0,0,0.7)"
+        />
+      </Button>
     </div>
 
     <Teleport
@@ -62,6 +91,13 @@
 
     <Modal v-if="isGameOver">
       <GameOver :isHighscore="isHighscore" />
+    </Modal>
+
+    <Modal v-if="gamePaused && !isGameOver">
+      <GamePaused
+        @continue="pauseGame"
+        @restart="restartGame"
+      />
     </Modal>
 
     <Vue3Lottie
@@ -95,10 +131,14 @@ import GameBoardHeader from "./GameBoardHeader.vue";
 import GameStats from "./GameStats.vue";
 import MobileControls from "./MobileControls.vue";
 import Modal from "./Modal.vue";
-import { Vue3Lottie } from "vue3-lottie";
 import popSound from "@/assets/sounds/pop.mp3";
 import scoreSound from "@/assets/sounds/score.mp3";
 import blockSound from "@/assets/sounds/block.mp3";
+import GamePaused from "./GamePaused.vue";
+import GameSettings from "./GameSettings.vue";
+import IconPlay from "./icons/IconPlay.vue";
+import IconRestart from "./icons/IconRestart.vue";
+import IconPause from "./icons/IconPause.vue";
 
 export default {
   components: {
@@ -108,7 +148,11 @@ export default {
     GameStats,
     MobileControls,
     Modal,
-    Vue3Lottie,
+    GamePaused,
+    GameSettings,
+    IconPlay,
+    IconRestart,
+    IconPause,
   },
   data() {
     return {
@@ -182,6 +226,14 @@ export default {
       },
       deep: true,
     },
+    "store.triggerPause": {
+      handler(newVal) {
+        if (newVal) {
+          this.pauseGame();
+        }
+      },
+      deep: true,
+    },
   },
   mounted() {
     this.random = Math.floor(Math.random() * this.thePieces.length);
@@ -196,8 +248,8 @@ export default {
   },
   methods: {
     playSound(file) {
-      const audio = new Audio(file);
-      audio.volume = 0.2;
+      let audio = new Audio(file);
+      audio.volume = JSON.parse(this.store.soundPreference) ? 0.2 : 0;
       audio.play();
     },
     draw() {
@@ -226,6 +278,9 @@ export default {
         } else if (e.keyCode === 32) {
           this.hardDrop();
         }
+      }
+      if (e.keyCode === 80) {
+        this.pauseGame();
       }
     },
     moveDown() {
@@ -376,6 +431,7 @@ export default {
     },
     pauseGame() {
       this.gamePaused = !this.gamePaused;
+      this.store.toggleTriggerPause(false);
       if (this.store.isGameRunning) {
         clearInterval(this.timerId);
         this.timerId = null;
@@ -518,6 +574,7 @@ export default {
     gap: 12px;
     grid-template-areas: "game-board-header game-board-header" "stats stats" "grid actions" "grid preview";
     width: 100%;
+    background: transparent;
 
     .board-animation {
       left: 16px;
@@ -544,6 +601,10 @@ export default {
     box-sizing: border-box;
     background: var(--background);
     border-radius: var(--piece-border-radius);
+    @media (max-width: $mobile) {
+      border-color: var(--background);
+      background: white;
+    }
   }
 }
 
@@ -555,9 +616,25 @@ export default {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid #eff2f7;
+  align-self: flex-end;
 
   @media (max-width: $tablet) {
     z-index: 4;
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column-reverse;
+    border: none;
+    align-items: center;
+    width: fit-content;
+    button {
+      padding: 12px !important;
+      width: fit-content;
+      border-radius: 100%;
+      svg {
+        pointer-events: none;
+      }
+    }
   }
 }
 
@@ -598,6 +675,10 @@ export default {
       box-sizing: border-box;
       background: none;
       border-radius: var(--piece-border-radius);
+
+      @media (max-width: $mobile) {
+        border-color: var(--background);
+      }
     }
   }
 }

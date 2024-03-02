@@ -26,6 +26,10 @@ export default {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--inner-shadow);
+
+  @media (max-width: $mobile) {
+    border: 2px solid white;
+  }
 }
 
 .progress-bar {

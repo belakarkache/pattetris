@@ -63,7 +63,7 @@ export default {
   watch: {
     "store.content"(newVal, oldVal) {
       if (newVal > oldVal) {
-        this.audio.volume = 0.5;
+        this.audio.volume = JSON.parse(this.store.soundPreference) ? 0.5 : 0;
         this.audio.play();
         this.isToastOpen = true;
       }

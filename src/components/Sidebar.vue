@@ -149,10 +149,11 @@ export default {
     flex-direction: row;
     height: fit-content;
     max-height: 70px;
-    z-index: 2;
+    z-index: 100;
     justify-content: space-between;
     box-sizing: border-box;
     border-radius: 0;
+    border: 2px solid var(--sd-pink);
 
     .logo {
       margin: 0;
@@ -169,6 +170,7 @@ export default {
       border-radius: 20px;
       padding: calc(var(--size) / 2);
       flex-direction: row;
+      border: 2px solid var(--sd-pink);
 
       &--open {
         display: flex;

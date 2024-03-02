@@ -1,5 +1,8 @@
 <template>
-  <div class="app-wrapper">
+  <div
+    class="app-wrapper"
+    @click="handleClickOutsideGame"
+  >
     <Sidebar />
 
     <div class="too-small-warning">
@@ -37,6 +40,7 @@
 import Sidebar from "@/components/Sidebar.vue";
 import GameBoard from "@/components/GameBoard.vue";
 import Sad from "@/assets/animations/sad.json";
+import { useMainStore } from "./store/main";
 
 export default {
   name: "Home",
@@ -47,7 +51,26 @@ export default {
   data() {
     return {
       sad: Sad,
+      store: useMainStore(),
     };
+  },
+  methods: {
+    handleClickOutsideGame(e) {
+      if (this.store.triggerPause) return;
+
+      const containerClick =
+        e.target.offsetParent?.classList.contains("container") ||
+        e.target.classList?.contains("container") ||
+        e.target.dataset.location === "container";
+
+      if (
+        !containerClick &&
+        this.$router.currentRoute.value.name === "home" &&
+        this.store.isGameRunning
+      ) {
+        this.store.toggleTriggerPause(true);
+      }
+    },
   },
 };
 </script>
@@ -63,7 +86,7 @@ export default {
     flex-direction: row;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .router-view {

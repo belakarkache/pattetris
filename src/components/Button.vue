@@ -1,20 +1,23 @@
 <template>
   <button
     :style="{ background: bgColor }"
-    class="button shadow"
+    class="shadow"
+    :class="{ 'button--icon': hasIcon }"
     :disabled="disabled"
     @click="triggerAnimation"
   >
     {{ text }}
+    <slot v-if="hasIcon"></slot>
   </button>
 </template>
+
 <script>
 export default {
   name: "Button",
   props: {
     text: {
       type: String,
-      default: "Button",
+      default: "",
     },
     bgColor: {
       type: String,
@@ -24,9 +27,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    hasIcon: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
+
 <style lang="scss">
 button {
   all: unset;
@@ -41,6 +49,7 @@ button {
   cursor: pointer;
   transition: 0.2s ease all;
   color: rgba(0, 0, 0, 0.55);
+  box-sizing: border-box;
 
   &:active {
     transform: scale(0.96);
@@ -51,6 +60,10 @@ button {
     opacity: 0.5;
     pointer-events: none;
     user-select: none;
+  }
+
+  &.button--icon {
+    padding: 16px;
   }
 
   @media (max-width: $tablet) {

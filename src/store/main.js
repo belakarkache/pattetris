@@ -9,10 +9,15 @@ export const useMainStore = defineStore("main", {
     maxScore: localStorage.getItem("maxScore") || 0,
     linesToNextLevel: 2,
     isGameRunning: false,
+    triggerPause: false,
+    soundPreference: localStorage.getItem("soundPreference") || true,
   }),
   actions: {
     toggleGameRunning(status) {
       this.isGameRunning = status;
+    },
+    toggleTriggerPause(status) {
+      this.triggerPause = status;
     },
     incrementLevel() {
       this.level++;
@@ -37,6 +42,10 @@ export const useMainStore = defineStore("main", {
         localStorage.setItem("maxScore", this.score);
         this.maxScore = localStorage.getItem("maxScore");
       }
+    },
+    setSoundPreference(status) {
+      localStorage.setItem("soundPreference", status);
+      this.soundPreference = localStorage.getItem("soundPreference");
     },
   },
 });

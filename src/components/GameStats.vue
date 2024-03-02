@@ -89,7 +89,6 @@ export default {
     @media (max-width: $mobile) {
       gap: 6px;
       flex-direction: row;
-      justify-content: space-between;
     }
   }
 
@@ -117,12 +116,11 @@ export default {
       }
 
       @media (max-width: $mobile) {
-        background-color: var(--background);
+        background-color: white;
         border-radius: 10px;
         flex-direction: column;
         align-items: flex-start;
-        padding: 8px;
-        max-width: 55px;
+        padding: 10px;
       }
     }
 

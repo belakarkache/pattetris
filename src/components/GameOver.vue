@@ -1,6 +1,6 @@
 <template>
   <div class="game-over">
-    <h2 class="game-over__title">Fim de jogo</h2>
+    <h2 class="modal-content__title">Fim de jogo</h2>
     <Vue3Lottie
       :animationData="isHighscore ? Highscore : GameOver"
       autoplay
@@ -71,12 +71,6 @@ export default {
   height: 100%;
   gap: 6px;
 
-  &__title {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 26px;
-  }
-
   &__score {
     display: flex;
     flex-direction: column;
@@ -103,6 +97,7 @@ export default {
 
   &__play-again {
     margin-top: 16px;
+    width: 100%;
   }
 }
 </style>

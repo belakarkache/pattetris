@@ -1,5 +1,5 @@
 <template>
-  <Teleport to="body">
+  <Teleport to=".container">
     <div class="modal">
       <div class="modal-content">
         <slot></slot>
@@ -14,9 +14,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -27,14 +27,26 @@ export default {
   align-items: center;
   backdrop-filter: blur(4px);
   z-index: 100;
-}
+  border-radius: inherit;
+  .modal-content {
+    min-width: 260px;
+    padding: clamp(26px, 5vw, 40px);
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.25), inset 0px -8px 0px #d1d8ff;
+    animation: modal-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
-.modal-content {
-  background-color: white;
-  padding: var(--size) calc(var(--size) * 2);
-  border-radius: 20px;
-  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.25), inset 0px -8px 0px #d1d8ff;
-  animation: modal-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    :deep(.modal-content__title) {
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 26px;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    position: fixed;
+    border-radius: 0;
+  }
 }
 
 @keyframes modal-appear {
