@@ -2,7 +2,7 @@
   <main>
     <GameBoard />
 
-    <!-- <NextContent v-if="store.content < 10" /> -->
+    <NextContent v-if="store.content < 10" />
 
     <Toast :show="isToastOpen">
       <Vue3Lottie
@@ -33,7 +33,7 @@
 
 <script>
 import GameBoard from "@/components/GameBoard.vue";
-// import NextContent from "@/components/NextContent.vue";
+import NextContent from "@/components/NextContent.vue";
 import Toast from "@/components/Toast.vue";
 import { useMainStore } from "@/store/main";
 import { useContentStore } from "@/store/content";
@@ -46,7 +46,7 @@ export default {
   name: "Home",
   components: {
     GameBoard,
-    // NextContent,
+    NextContent,
     Toast,
     Button,
   },

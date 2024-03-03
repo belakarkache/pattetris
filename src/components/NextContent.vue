@@ -25,26 +25,19 @@ export default {
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: clamp(20px, 2.5vw, var(--size));
-  background: white;
+  padding: clamp(20px, 2.5vw, 32px);
   border-top-left-radius: 30px;
 
   small {
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 10px;
   }
 
   p {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     margin: 0;
     padding-top: 4px;
-  }
-
-  @media (max-width: $tablet) {
-    top: 12%;
-    bottom: unset;
-    border-bottom-left-radius: 30px;
   }
 }
 </style>

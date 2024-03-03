@@ -76,7 +76,7 @@ export default {
   .content-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 80px 20px;
+    gap: 90px 20px;
 
     .content-wrapper {
       position: relative;
@@ -150,6 +150,9 @@ export default {
     justify-content: flex-start;
 
     .content-wrapper {
+      justify-content: center;
+    }
+    .content-grid {
       justify-content: center;
     }
   }

@@ -44,7 +44,7 @@ export default {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 10;
+  z-index: 101;
   border-radius: 30px;
   pointer-events: none;
   overflow: hidden;
