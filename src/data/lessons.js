@@ -22,7 +22,7 @@ const lessons = [
       "<strong>Extensibilidade:</strong> É fácil adicionar novas classes concretas sem modificar o código que utiliza os objetos. Isso torna o código mais extensível e facilita a adição de novos recursos.",
       "<strong>Simplicidade:</strong> O código que utiliza os objetos fica mais simples e fácil de entender, pois não precisa se preocupar com a criação de objetos. Isso torna o código mais fácil de manter e de entender.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/4wufda1v/1/embedded/js/dark/",
+    gistId: "ff23c4218501bb1699575ae3fd258225",
     disadvantages: [
       "<strong>Complexidade adicional:</strong> O uso do Factory Pattern pode adicionar uma camada de complexidade ao código, especialmente em cenários simples onde a criação de objetos é direta.",
       "<strong>Aumento do número de classes:</strong> O Factory Pattern geralmente envolve a criação de várias classes adicionais, o que pode aumentar a complexidade e o número total de classes no sistema.",
@@ -48,7 +48,7 @@ const lessons = [
       "<strong>Manutenção:</strong>  Os algoritmos são encapsulados em classes separadas, facilitando a manutenção e extensão do código.",
       "<strong>Reutilização de código:</strong>  As estratégias podem ser reutilizadas em diferentes partes do sistema, promovendo a reutilização de código.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/9qabzL1n/embedded/js/dark/",
+    gistId: "bc1151e0de0fe1899558755adb1b5b8f",
     disadvantages: [
       "<strong>Complexidade adicional:</strong>  Pode introduzir uma complexidade adicional no código devido à necessidade de criar várias classes para diferentes estratégias.",
       "<strong>Aumento do número de classes:</strong> O uso extensivo do Strategy Pattern pode aumentar o número total de classes no sistema.",
@@ -74,7 +74,7 @@ const lessons = [
       "<strong>Redução de consumo de recursos:</strong> Evita a criação desnecessária de múltiplas instâncias da classe, o que pode economizar memória e recursos do sistema.",
       "<strong>Fácil implementação:</strong> É fácil de implementar e entender, tornando-o um padrão popular em muitos sistemas.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/7auhy4v3/embedded/js/dark/",
+    gistId: "f5d43865f684057b63f637b7e2cbb2fa",
     disadvantages: [
       "<strong>Dificuldade de testes unitários:</strong> Pode ser difícil realizar testes unitários devido à dependência do Singleton em seu estado global. Isso pode tornar os testes mais complicados e menos isolados.",
       "<strong>Acoplamento forte:</strong> O uso extensivo do Singleton pode levar a um acoplamento forte em todo o código, o que pode tornar o sistema mais difícil de entender e manter.",
@@ -100,7 +100,7 @@ const lessons = [
       "<strong>Abstração da coleção:</strong> Ele fornece uma interface unificada para percorrer diferentes tipos de coleções, ocultando os detalhes de implementação da coleção.",
       "<strong>Suporte a iteração personalizada:</strong> O padrão Iterator permite implementar iterações personalizadas sobre uma coleção, fornecendo métodos para acessar os elementos de maneiras específicas.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/tzhjo1f3/6/embedded/js/dark/",
+    gistId: "9773edd7a9bbdca673a3729c41499de1",
     disadvantages: [
       "<strong>Complexidade adicional:</strong> Em algumas situações simples, a implementação do Iterator Pattern pode adicionar complexidade desnecessária ao código.",
       "<strong>Overhead de memória:</strong> Em grandes coleções, pode haver overhead de memória ao manter o estado do iterador, especialmente se o iterador mantiver referências aos elementos da coleção.",
@@ -126,7 +126,7 @@ const lessons = [
       "<strong>Extensibilidade:</strong> Novos observadores podem ser adicionados facilmente sem modificar o objeto observado, tornando o sistema mais extensível.",
       "<strong>Notificação eficiente:</strong> Os observadores são notificados apenas quando ocorrem mudanças relevantes no objeto observado, evitando notificações desnecessárias.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/81a93woz/embedded/js/dark/",
+    gistId: "f16b43286f13f26c8e401540d31c9bb0",
     disadvantages: [
       "<strong>Vazamento de memória:</strong> Se os observadores não forem removidos corretamente, pode haver vazamento de memória, já que o objeto observável mantém referências para os observadores.",
       "<strong>Ordem de notificação não garantida:</strong> A ordem em que os observadores são notificados pode variar e não é garantida, o que pode ser um problema em alguns casos de uso.",
@@ -152,7 +152,7 @@ const lessons = [
       "<strong>Encapsulamento:</strong> Ele encapsula o objeto subjacente, permitindo adicionar comportamentos adicionais sem modificar sua interface original.",
       "<strong>Aprimoramento de desempenho:</strong> O Proxy pode adicionar funcionalidades de armazenamento em cache ou adiar a criação do objeto subjacente até que seja realmente necessário, melhorando o desempenho em certos cenários.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/zx42gr59/1/embedded/js/dark/",
+    gistId: "8ff1a5c7c1ec0c504cdf624c681007b2",
     disadvantages: [
       "<strong>Complexidade adicional:</strong> A introdução de um Proxy pode adicionar complexidade ao código, especialmente se houver vários Proxys intermediários ou se o comportamento do Proxy for complexo.",
       "<strong>Sobrecarga de desempenho:</strong> Em certos casos, o uso de um Proxy pode introduzir sobrecarga de desempenho devido à necessidade de redirecionar chamadas ao objeto subjacente.",
@@ -178,7 +178,7 @@ const lessons = [
       "<strong>Centralização da lógica de comunicação:</strong> Ao centralizar a lógica de comunicação em um objeto mediador, o padrão facilita a manutenção e evita a duplicação de código.",
       "<strong>Facilita a adição de novos componentes:</strong> Novos componentes podem ser facilmente adicionados ao sistema sem alterar a lógica de comunicação existente, tornando o sistema mais extensível.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/53byztfm/10/embedded/js/dark/",
+    gistId: "06a443d2cf8bc7032e447ac8adaeadab",
     disadvantages: [
       "<strong>Complexidade adicional:</strong> Introduzir um objeto mediador pode adicionar complexidade ao sistema, especialmente se a lógica de mediação se tornar muito complexa.",
       "<strong>Potencial ponto único de falha:</strong> O mediador pode se tornar um ponto único de falha se não for adequadamente gerenciado ou se tornar sobrecarregado com responsabilidades excessivas.",
@@ -204,7 +204,7 @@ const lessons = [
       "Desacoplamento: Ele desacopla o algoritmo das classes de objetos, o que facilita a manutenção e evita a proliferação de subclasses para cada nova operação.",
       "Reutilização de código: Ao separar o algoritmo em classes de visitantes, o padrão promove a reutilização de código ao permitir que diferentes objetos sejam visitados pelo mesmo visitante.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/b9sykLjv/2/embedded/js/dark/",
+    gistId: "e0617879e8ff1121bda01909d117bdf7",
     disadvantages: [
       "Complexidade adicional: O padrão Visitor pode adicionar complexidade ao código, especialmente se a estrutura de objetos for complexa ou se houver muitos tipos diferentes de visitantes.",
       "Violação do princípio aberto/fechado: Embora o Visitor facilite a adição de novas operações, ele pode violar o princípio aberto/fechado se novos tipos de elementos forem adicionados com frequência, exigindo modificações nos visitantes existentes.",
@@ -230,7 +230,7 @@ const lessons = [
       "<strong>Melhoria da confiabilidade:</strong> Ele melhora a confiabilidade das operações, tentando novamente até que a operação seja bem-sucedida ou até que um número máximo de tentativas seja atingido.",
       "<strong>Redução de erros não tratados:</strong> Ajuda a reduzir erros não tratados, oferecendo uma maneira estruturada de lidar com falhas temporárias e recuperáveis.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/3Lwf9jnp/2/embedded/js/dark/",
+    gistId: "14fe53e148e301e1d30529c94f85038e",
     disadvantages: [
       "<strong>Potencial de loops infinitos:</strong> Se não forem definidos limites adequados, o Retry Pattern pode levar a loops infinitos, onde a operação é repetida indefinidamente sem sucesso.",
       "<strong>Atrasos desnecessários:</strong> Em alguns casos, o uso de retry pode resultar em atrasos desnecessários, especialmente se as tentativas forem realizadas rapidamente em situações em que a falha é persistente.",
@@ -251,7 +251,7 @@ const lessons = [
       "Flexibilidade: Ele permite criar diferentes representações do mesmo objeto usando o mesmo processo de construção, o que é útil quando o objeto tem muitas opções de configuração.",
       "Encapsulamento: O Builder encapsula o código de construção dentro de uma classe separada, reduzindo a complexidade e a duplicação de código.",
     ],
-    iframeUrl: "//jsfiddle.net/ickadev/h7n9aptL/11/embedded/js/dark/",
+    gistId: "59a917f9909e88b2197927a37aeccdee",
     disadvantages: [
       "Complexidade adicional: Em objetos simples, o uso do Builder pode adicionar complexidade desnecessária ao código.",
       "Código repetitivo: Dependendo da implementação, pode haver alguma repetição de código ao definir os métodos de configuração no Builder.",

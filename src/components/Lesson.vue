@@ -62,13 +62,7 @@
       </ul>
 
       <p class="content-subtitle">Exemplo em Javascript</p>
-      <iframe
-        v-if="fullContent.iframeUrl"
-        width="100%"
-        height="300"
-        :src="fullContent.iframeUrl"
-        frameborder="0"
-      ></iframe>
+      <VueGist :gistId="fullContent.gistId" />
 
       <p class="content-subtitle">Desvantagens</p>
       <ul class="content-list">
@@ -142,9 +136,13 @@
 import { useContentStore } from "@/store/content";
 import { useMainStore } from "@/store/main";
 import lessons from "@/data/lessons";
+import VueGist from "./VueGist.vue";
 
 export default {
   name: "lesson",
+  components: {
+    VueGist,
+  },
   data() {
     return {
       contents: useContentStore().contents,
