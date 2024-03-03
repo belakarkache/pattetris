@@ -630,7 +630,7 @@ export default {
     button {
       padding: 12px !important;
       width: fit-content;
-      border-radius: 100%;
+      border-radius: 10px;
       svg {
         pointer-events: none;
       }
