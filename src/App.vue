@@ -1,19 +1,9 @@
 <template>
-  <div
-    class="app-wrapper"
-    @click="handleClickOutsideGame"
-  >
+  <div class="app-wrapper" @click="handleClickOutsideGame">
     <Sidebar />
 
     <div class="too-small-warning">
-      <Vue3Lottie
-        class="sad-animation"
-        :animationData="sad"
-        :height="200"
-        :width="200"
-        :loop="true"
-        :autoPlay="true"
-      />
+      <Vue3Lottie class="sad-animation" :animationData="sad" :height="200" :width="200" :loop="true" :autoPlay="true" />
 
       <p style="line-height: 1.4">
         Ops! Seu dispositivo é pequeno demais para visualizar a aplicação
@@ -22,14 +12,8 @@
       </p>
     </div>
 
-    <router-view
-      v-slot="{ Component }"
-      class="router-view"
-    >
-      <transition
-        name="scale"
-        mode="out-in"
-      >
+    <router-view v-slot="{ Component }" class="router-view">
+      <transition name="scale" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
@@ -98,6 +82,10 @@ export default {
 
     @media (max-width: $min) {
       display: none;
+    }
+
+    @media (max-width: $mobile) {
+      margin-top: 58px;
     }
   }
 

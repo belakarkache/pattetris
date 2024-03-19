@@ -1,38 +1,17 @@
 <template>
   <nav class="sidebar">
     <router-link to="/">
-      <img
-        src="@/assets/logo.svg"
-        width="150"
-        class="logo"
-      />
+      <img src="@/assets/logo.svg" width="150" class="logo" />
     </router-link>
 
-    <Burger
-      @click="isMenuOpen = !isMenuOpen"
-      :status="isMenuOpen"
-      v-if="$matches.medium.max && !store.isGameRunning"
-    />
+    <Burger @click="isMenuOpen = !isMenuOpen" :status="isMenuOpen" v-if="$matches.medium.max && !store.isGameRunning" />
 
-    <ul
-      class="sidebar__links"
-      :class="{ 'sidebar__links--open': isMenuOpen }"
-    >
-      <router-link
-        v-for="item in items"
-        :key="item.name"
-        :to="item.route"
-        :class="{ disabled: store.isGameRunning }"
-      >
-        <component
-          :is="item.icon"
-          :size="26"
-          :color="
-            $router.currentRoute.value.name === item.name
-              ? 'var(--hl-pink)'
-              : 'var(--dark-blue)'
-          "
-        />
+    <ul class="sidebar__links" :class="{ 'sidebar__links--open': isMenuOpen }">
+      <router-link v-for="item in items" :key="item.name" :to="item.route" :class="{ disabled: store.isGameRunning }">
+        <component :is="item.icon" :size="26" :color="$router.currentRoute.value.name === item.name
+      ? 'var(--hl-pink)'
+      : 'var(--dark-blue)'
+      " />
         {{ item.text }}
       </router-link>
     </ul>
@@ -41,7 +20,6 @@
 
 <script>
 import Burger from "./Burger.vue";
-import IconBookmark from "./icons/IconBookmark.vue";
 import IconGamepad from "./icons/IconGamepad.vue";
 import IconGift from "./icons/IconGift.vue";
 import IconInfo from "./icons/IconInfo.vue";
@@ -49,7 +27,7 @@ import { useMainStore } from "@/store/main";
 
 export default {
   name: "Sidebar",
-  components: { IconGamepad, IconGift, IconInfo, IconBookmark, Burger },
+  components: { IconGamepad, IconGift, IconInfo, Burger },
   data() {
     return {
       isMenuOpen: false,
@@ -67,13 +45,7 @@ export default {
           icon: "IconInfo",
           route: "/about",
           text: "Sobre o Pattetris",
-        },
-        {
-          name: "credits",
-          icon: "IconBookmark",
-          route: "/credits",
-          text: "Créditos",
-        },
+        }
       ],
     };
   },
@@ -144,10 +116,11 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    padding: calc(var(--size) / 2);
     display: flex;
     flex-direction: row;
-    height: fit-content;
+    height: 58px;
+    padding: 0 20px;
+    align-items: center;
     max-height: 70px;
     z-index: 100;
     justify-content: space-between;
@@ -162,18 +135,23 @@ export default {
 
     &__links {
       margin: 0;
-      display: none;
+      display: flex;
       position: absolute;
       background-color: white;
-      top: 86px;
-      right: 14px;
+      top: 60px;
+      right: 4px;
       border-radius: 20px;
       padding: calc(var(--size) / 2);
       flex-direction: row;
       border: 2px solid var(--sd-pink);
+      transform: translateX(200%);
+      opacity: 0;
+      transition: 0.3s ease-in-out all;
+
 
       &--open {
-        display: flex;
+        transform: translateX(0);
+        opacity: 1;
       }
     }
   }

@@ -5,15 +5,8 @@
     <NextContent v-if="store.content < 10" />
 
     <Toast :show="isToastOpen">
-      <Vue3Lottie
-        :animationData="Medal"
-        :width="60"
-        :height="60"
-        :loop="1"
-        :autoplay="true"
-        :speed="1.2"
-        @on-complete="() => (isToastOpen = false)"
-      />
+      <Vue3Lottie :animationData="Medal" :width="60" :height="60" :loop="1" :autoplay="true" :speed="1.2"
+        @on-complete="() => (isToastOpen = false)" />
 
       <div class="toast-text">
         <p class="toast-text--small">Novo conteúdo liberado!</p>
@@ -21,12 +14,6 @@
           {{ contents[store.content - 1].title }}
         </p>
       </div>
-
-      <Button
-        text="Ver"
-        bgColor="var(--tetris-pink)"
-        @click="$router.push(`/content/${contents[store.content - 1].id}`)"
-      />
     </Toast>
   </main>
 </template>
@@ -39,7 +26,6 @@ import { useMainStore } from "@/store/main";
 import { useContentStore } from "@/store/content";
 import PinkConfetti from "@/assets/animations/pink-confetti.json";
 import Medal from "@/assets/animations/medal.json";
-import Button from "@/components/Button.vue";
 import unlockedContentSound from "@/assets/sounds/unlocked-content.mp3";
 
 export default {
@@ -48,7 +34,6 @@ export default {
     GameBoard,
     NextContent,
     Toast,
-    Button,
   },
   data() {
     return {
