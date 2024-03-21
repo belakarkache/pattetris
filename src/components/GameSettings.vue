@@ -1,23 +1,12 @@
 <template>
   <div class="game-settings">
-    <div
-      v-for="setting in settings"
-      :key="setting.name"
-      class="game-settings__setting"
-      @click="handleSettingClick(setting)"
-      :class="{
-        'game-settings__setting--disabled':
-          setting.name === 'Placar' ||
-          (store.isGameRunning && setting.name !== 'Som'),
-      }"
-      data-location="container"
-    >
-      <component
-        :is="setting.icon"
-        :size="20"
-        :aria-label="setting.name"
-        :isOn="JSON.parse(store.soundPreference)"
-      />
+    <div v-for="setting in settings" :key="setting.name" class="game-settings__setting"
+      @click="handleSettingClick(setting)" :class="{
+      'game-settings__setting--disabled':
+        setting.name === 'Placar' ||
+        (store.isGameRunning && setting.name !== 'Som'),
+    }" data-location="container">
+      <component :is="setting.icon" :size="20" :aria-label="setting.name" :isOn="JSON.parse(store.soundPreference)" />
     </div>
 
     <Modal v-if="isInstructionsOpen">
@@ -95,6 +84,7 @@ export default {
   gap: 12px;
   justify-content: center;
   align-items: center;
+
   &__setting {
     width: 32px;
     height: 32px;
@@ -103,11 +93,13 @@ export default {
     display: grid;
     place-items: center;
     cursor: pointer;
+
     &--disabled {
       opacity: 0.5;
       pointer-events: none;
       cursor: not-allowed;
     }
+
     svg {
       pointer-events: none;
     }
@@ -115,6 +107,7 @@ export default {
 
   @media (max-width: $mobile) {
     flex-direction: column;
+
     &__setting {
       background-color: white;
     }

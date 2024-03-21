@@ -2,8 +2,6 @@
   <main>
     <GameBoard />
 
-    <NextContent v-if="store.content < 10" />
-
     <Toast :show="isToastOpen">
       <Vue3Lottie :animationData="Medal" :width="60" :height="60" :loop="1" :autoplay="true" :speed="1.2"
         @on-complete="() => (isToastOpen = false)" />
@@ -20,7 +18,6 @@
 
 <script>
 import GameBoard from "@/components/GameBoard.vue";
-import NextContent from "@/components/NextContent.vue";
 import Toast from "@/components/Toast.vue";
 import { useMainStore } from "@/store/main";
 import { useContentStore } from "@/store/content";
@@ -32,7 +29,6 @@ export default {
   name: "Home",
   components: {
     GameBoard,
-    NextContent,
     Toast,
   },
   data() {
@@ -65,13 +61,15 @@ main {
   align-items: center;
   padding-right: var(--size);
   justify-content: center;
+  overflow: hidden;
 
   @media (max-width: $tablet) {
     padding: calc(var(--size) / 2);
   }
 
   @media (max-width: $mobile) {
-    padding: 20px;
+    height: fit-content;
+    padding: 4px 20px !important;
     flex-direction: column;
     justify-content: flex-start;
   }

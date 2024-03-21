@@ -8,6 +8,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  box-sizing: border-box;
 }
 
 img {
@@ -28,7 +29,7 @@ img {
   --hl-green: #0e771f;
   --hl-yellow: #775900;
   --hl-purple: #2e3269;
-  --piece-size: clamp(20px, 5.4vw, 26px);
+  --piece-size: clamp(24px, 5.4vw, 28px);
   --grid-height: calc(var(--piece-size) * 20);
   --grid-width: calc(var(--piece-size) * 10);
   --preview-grid-size: calc(var(--piece-size) * 4);
@@ -48,17 +49,19 @@ p {
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
   overflow-x: hidden;
   margin: 0;
   background-color: var(--background);
   color: var(--dark-blue);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
 
 .title {
-  font-size: clamp(16px, 1.3vw, 22px);
+  font-size: clamp(14px, 1.3vw, 22px);
   font-weight: 700;
   margin: 0;
 }

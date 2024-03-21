@@ -28,6 +28,7 @@ export default {
   backdrop-filter: blur(4px);
   z-index: 100;
   border-radius: inherit;
+
   .modal-content {
     min-width: 260px;
     padding: clamp(26px, 5vw, 40px);
@@ -54,10 +55,12 @@ export default {
     opacity: 0;
     transform: scale(0.6);
   }
+
   60% {
     opacity: 1;
     transform: scale(1.08);
   }
+
   100% {
     transform: scale(1);
   }

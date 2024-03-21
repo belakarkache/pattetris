@@ -1,51 +1,13 @@
 <template>
   <div class="stats">
     <div class="stats__wrapper">
-      <div class="stat__wrapper">
-        <IconCheck
-          :size="26"
-          class="stat__icon"
-        />
-        <div class="stat__wrapper--text">
-          <h3>{{ store.lines < 10 ? "0" + store.lines : store.lines }}</h3>
-          <p>linhas completas</p>
+      <div class="stat__wrapper" v-for="stat, index in stats" :key="index">
+        <div class="stat__icon">
+          <component :is="stat.icon" :size="26" />
         </div>
-      </div>
-
-      <div class="stat__wrapper">
-        <IconThreeStars
-          :size="26"
-          class="stat__icon"
-        />
         <div class="stat__wrapper--text">
-          <h3>{{ store.maxScore }}</h3>
-          <p>pontuação máxima</p>
-        </div>
-      </div>
-
-      <div class="stat__wrapper">
-        <IconStar
-          :size="26"
-          class="stat__icon"
-        />
-        <div class="stat__wrapper--text">
-          <h3 :class="{ rainbow: store.score > store.maxScore }">
-            {{ store.score }}
-          </h3>
-          <p :class="{ rainbow: store.score > store.maxScore }">
-            pontuação atual
-          </p>
-        </div>
-      </div>
-
-      <div class="stat__wrapper">
-        <IconUnlock
-          :size="26"
-          class="stat__icon"
-        />
-        <div class="stat__wrapper--text">
-          <h3>{{ store.content }}/10</h3>
-          <p>conteúdos liberados</p>
+          <h3>{{ stat.value }}</h3>
+          <p>{{ stat.text }}</p>
         </div>
       </div>
     </div>
@@ -68,14 +30,30 @@ export default {
     };
   },
   computed: {
-    text() {
-      return {
-        lines: "linhas completas",
-        maxScore: "pontuação máxima",
-        score: "pontuação atual",
-        content: "conteúdos liberados",
-      };
-    },
+    stats() {
+      return [
+        {
+          icon: "IconCheck",
+          text: "linhas completas",
+          value: this.store.lines < 10 ? "0" + this.store.lines : this.store.lines,
+        },
+        {
+          icon: "IconThreeStars",
+          text: "pontuação máxima",
+          value: this.store.maxScore,
+        },
+        {
+          icon: "IconStar",
+          text: "pontuação atual",
+          value: this.store.score,
+        },
+        {
+          icon: "IconUnlock",
+          text: "conteúdos liberados",
+          value: `${this.store.content}/10`,
+        },
+      ];
+    }
   },
 };
 </script>
@@ -127,15 +105,20 @@ export default {
     &__icon {
       background-color: var(--background);
       box-shadow: var(--inner-shadow);
-      padding: clamp(4px, 1vw, 10px);
+      padding: 8px;
       border-radius: 10px;
-      width: clamp(16px, 2.5vw, 30px);
-      height: clamp(16px, 2.5vw, 30px);
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
 
       @media (max-width: $mobile) {
-        padding: 0;
-        background-color: transparent;
-        box-shadow: none;
+        display: none;
       }
     }
   }

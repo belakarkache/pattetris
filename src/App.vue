@@ -61,23 +61,25 @@ export default {
 
 <style lang="scss">
 #app {
-  height: 100%;
   width: 100%;
 
   .app-wrapper {
     display: flex;
     gap: calc(var(--size) / 2);
     flex-direction: row;
-    height: 100%;
     width: 100%;
     overflow-x: hidden;
   }
 
   .router-view {
     display: flex;
+    margin-left: 300px;
+
+    padding: var(--size);
 
     @media (max-width: $tablet) {
-      margin-top: 70px;
+      margin-top: 58px;
+      margin-left: 0;
     }
 
     @media (max-width: $min) {
@@ -85,6 +87,7 @@ export default {
     }
 
     @media (max-width: $mobile) {
+      padding: 20px;
       margin-top: 58px;
     }
   }

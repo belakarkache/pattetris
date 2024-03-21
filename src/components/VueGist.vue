@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="vue-gist"
-    v-pre
-  />
+  <div id="vue-gist" v-pre />
 </template>
 <script>
 import gistSimple from "gist-simple";
@@ -16,12 +13,15 @@ export default {
     },
   },
   watch: {
-    gistId() {
-      if (this.gistId) {
-        gistSimple(document.getElementById("vue-gist"), {
-          id: this.gistId,
-        });
-      }
+    gistId: {
+      handler() {
+        if (this.gistId) {
+          gistSimple(document.getElementById("vue-gist"), {
+            id: this.gistId,
+          });
+        }
+      },
+      immediate: true
     },
   },
 };

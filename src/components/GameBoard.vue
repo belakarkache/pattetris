@@ -3,29 +3,19 @@
     <GameBoardHeader class="game-board-header" />
 
     <div class="grid">
-      <div
-        v-for="(cell, index) in grid"
-        :key="index"
-        :class="{
-          filled: cell.filled,
-          'filled--hidden': index >= 200 && index <= 209,
-        }"
-      />
+      <div v-for="(cell, index) in grid" :key="index" :class="{
+        filled: cell.filled,
+        'filled--hidden': index >= 200 && index <= 209,
+      }
+        " />
     </div>
 
     <div class="preview">
-      <p
-        class="preview-text"
-        v-show="hasStarted"
-      >
+      <p class="preview-text" v-show="hasStarted">
         Próxima peça:
       </p>
       <div class="preview-grid">
-        <div
-          v-for="(cell, index) in miniGrid"
-          :key="index"
-          :class="{ piece: cell.piece }"
-        ></div>
+        <div v-for="(cell, index) in miniGrid" :key="index" :class="{ piece: cell.piece }"></div>
       </div>
     </div>
 
@@ -34,59 +24,22 @@
     <div class="actions">
       <GameSettings />
 
-      <Button
-        :text="$matches.small.max ? '' : 'Jogar'"
-        @click="startGame"
-        v-if="!store.isGameRunning && !gamePaused"
-        data-location="container"
-        :hasIcon="$matches.small.max"
-      >
-        <IconPlay
-          v-if="$matches.small.max"
-          :size="22"
-          color="rgba(0,0,0,0.7)"
-        />
+      <Button :text="$matches.small.max ? '' : 'Jogar'" @click="startGame" v-if="!store.isGameRunning && !gamePaused"
+        data-location="container" :hasIcon="$matches.small.max">
+        <IconPlay v-if="$matches.small.max" :size="22" color="rgba(0,0,0,0.7)" />
       </Button>
-      <Button
-        :text="$matches.small.max ? '' : 'Reiniciar'"
-        @click="restartGame"
-        textColor="var(--hl-yellow)"
-        bgColor="var(--tetris-yellow)"
-        :hasIcon="$matches.small.max"
-        v-else
-      >
-        <IconRestart
-          v-if="$matches.small.max"
-          :size="22"
-          color="rgba(0,0,0,0.7)"
-        />
+      <Button :text="$matches.small.max ? '' : 'Reiniciar'" @click="restartGame" textColor="var(--hl-yellow)"
+        bgColor="var(--tetris-yellow)" :hasIcon="$matches.small.max" v-else>
+        <IconRestart v-if="$matches.small.max" :size="22" color="rgba(0,0,0,0.7)" />
       </Button>
-      <Button
-        :text="$matches.small.max ? '' : 'Pausar'"
-        @click="pauseGame"
-        v-if="hasStarted"
-        textColor="var(--hl-purple)"
-        bgColor="var(--tetris-purple)"
-        :hasIcon="$matches.small.max"
-      >
-        <IconPause
-          v-if="$matches.small.max"
-          :size="22"
-          color="rgba(0,0,0,0.7)"
-        />
+      <Button :text="$matches.small.max ? '' : 'Pausar'" @click="pauseGame" v-if="hasStarted"
+        textColor="var(--hl-purple)" bgColor="var(--tetris-purple)" :hasIcon="$matches.small.max">
+        <IconPause v-if="$matches.small.max" :size="22" color="rgba(0,0,0,0.7)" />
       </Button>
     </div>
 
-    <Teleport
-      to="body"
-      v-if="store.isGameRunning && $matches.medium.max"
-    >
-      <MobileControls
-        @tap="rotate()"
-        @left="moveLeft()"
-        @right="moveRight()"
-        @bottom="moveDown()"
-      />
+    <Teleport to="body" v-if="store.isGameRunning && $matches.medium.max">
+      <MobileControls @tap="rotate()" @left="moveLeft()" @right="moveRight()" @bottom="moveDown()" />
     </Teleport>
 
     <Modal v-if="isGameOver">
@@ -94,34 +47,19 @@
     </Modal>
 
     <Modal v-if="gamePaused && !isGameOver">
-      <GamePaused
-        @continue="pauseGame"
-        @restart="restartGame"
-      />
+      <GamePaused @continue="pauseGame" @restart="restartGame" />
     </Modal>
 
-    <Vue3Lottie
-      :animationData="Confetti"
-      :autoPlay="false"
-      :loop="false"
-      ref="confetti"
-      @on-complete="completeAnimation('confetti')"
-      class="board-animation confetti"
-    />
+    <Vue3Lottie :animationData="Confetti" :autoPlay="false" :loop="false" ref="confetti"
+      @on-complete="completeAnimation('confetti')" class="board-animation confetti" />
 
-    <Vue3Lottie
-      :animationData="LevelUp"
-      :autoPlay="false"
-      :loop="false"
-      ref="levelup"
-      @on-complete="completeAnimation('levelup')"
-      class="board-animation levelup"
-    />
+    <Vue3Lottie :animationData="LevelUp" :autoPlay="false" :loop="false" ref="levelup"
+      @on-complete="completeAnimation('levelup')" class="board-animation levelup" />
   </div>
 </template>
 
 <script>
-import PieceFactory from "../../PieceFactory.js";
+import createPiece from "../../PieceFactory.js";
 import Confetti from "@/assets/animations/confetti.json";
 import LevelUp from "@/assets/animations/levelup.json";
 import Button from "./Button.vue";
@@ -178,7 +116,6 @@ export default {
       random: null,
       displayWidth: 4,
       displayIndex: 0,
-      pieceFactory: new PieceFactory(10),
       currentPiece: [],
       gamePaused: false,
       hasStarted: false,
@@ -189,11 +126,11 @@ export default {
   computed: {
     thePieces() {
       return [
-        this.pieceFactory.createPiece("l"),
-        this.pieceFactory.createPiece("z"),
-        this.pieceFactory.createPiece("t"),
-        this.pieceFactory.createPiece("o"),
-        this.pieceFactory.createPiece("i"),
+        createPiece("l", this.width),
+        createPiece("z", this.width),
+        createPiece("t", this.width),
+        createPiece("o", this.width),
+        createPiece("i", this.width),
       ];
     },
     upNextPieces() {
@@ -573,7 +510,6 @@ export default {
     padding: 16px;
     gap: 12px;
     grid-template-areas: "game-board-header game-board-header" "stats stats" "grid actions" "grid preview";
-    width: 100%;
     background: transparent;
 
     .board-animation {
@@ -601,6 +537,7 @@ export default {
     box-sizing: border-box;
     background: var(--background);
     border-radius: var(--piece-border-radius);
+
     @media (max-width: $mobile) {
       border-color: var(--background);
       background: white;
@@ -627,10 +564,12 @@ export default {
     border: none;
     align-items: center;
     width: fit-content;
+
     button {
       padding: 12px !important;
       width: fit-content;
       border-radius: 10px;
+
       svg {
         pointer-events: none;
       }
@@ -655,6 +594,7 @@ export default {
 
 .preview {
   grid-area: preview;
+
   .preview-text {
     font-size: 12px;
     margin-top: 0;
@@ -668,6 +608,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     grid-area: preview-grid;
+
     div {
       height: var(--piece-size);
       width: var(--piece-size);

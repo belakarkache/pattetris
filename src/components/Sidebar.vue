@@ -63,11 +63,16 @@ export default {
 .sidebar {
   background: white;
   width: fit-content;
+  max-width: 300px;
   padding: var(--size);
   padding-left: calc(var(--size) / 2);
   padding-right: calc(var(--size) / 2);
   height: 80%;
   border-bottom-right-radius: 40px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: unset;
 
   .logo {
     margin-left: 8px;
@@ -121,12 +126,13 @@ export default {
     height: 58px;
     padding: 0 20px;
     align-items: center;
-    max-height: 70px;
+    max-height: 58px;
     z-index: 100;
     justify-content: space-between;
     box-sizing: border-box;
     border-radius: 0;
     border: 2px solid var(--sd-pink);
+    max-width: 100%;
 
     .logo {
       margin: 0;

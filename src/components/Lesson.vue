@@ -2,37 +2,20 @@
   <div class="lesson">
     <div class="lesson__breadcrumb">
       <router-link to="/content">
-        <img
-          src="@/assets/content-icons/folder.svg"
-          width="24"
-          height="24"
-        />
+        <img src="@/assets/content-icons/folder.svg" width="24" height="24" />
         Conteúdos
       </router-link>
       /
       <div class="current-lesson">
-        <img
-          :src="lessonInfo.icon"
-          width="24"
-          height="24"
-        />
+        <img :src="lessonInfo.icon" width="24" height="24" />
         {{ lessonInfo.title }}
       </div>
     </div>
 
     <div class="lesson__cover">
-      <img
-        :src="fullContent.coverImage"
-        height="280"
-        width="1024"
-      />
+      <img :src="fullContent.coverImage" height="280" width="1024" />
 
-      <img
-        :src="lessonInfo.icon"
-        width="120"
-        height="120"
-        class="cover-icon"
-      />
+      <img :src="lessonInfo.icon" width="120" height="120" class="cover-icon" />
     </div>
 
     <div class="lesson__content">
@@ -45,19 +28,9 @@
 
       <p class="content-subtitle">Benefícios</p>
       <ul class="content-list">
-        <li
-          v-for="benefit in fullContent.benefits"
-          :key="benefit"
-        >
-          <img
-            src="@/assets/content-icons/sparkles.svg"
-            height="20"
-            width="20"
-          />
-          <div
-            v-html="benefit"
-            class="list-text"
-          />
+        <li v-for="benefit in fullContent.benefits" :key="benefit">
+          <img src="@/assets/content-icons/sparkles.svg" height="20" width="20" />
+          <div v-html="benefit" class="list-text" />
         </li>
       </ul>
 
@@ -66,64 +39,28 @@
 
       <p class="content-subtitle">Desvantagens</p>
       <ul class="content-list">
-        <li
-          v-for="disadvantage in fullContent.disadvantages"
-          :key="disadvantage"
-        >
-          <img
-            src="@/assets/content-icons/warning.svg"
-            height="20"
-            width="20"
-          />
-          <div
-            v-html="disadvantage"
-            class="list-text"
-          />
+        <li v-for="disadvantage in fullContent.disadvantages" :key="disadvantage">
+          <img src="@/assets/content-icons/warning.svg" height="20" width="20" />
+          <div v-html="disadvantage" class="list-text" />
         </li>
       </ul>
 
       <p class="content-subtitle">Ideias de uso</p>
       <ul class="content-list">
-        <li
-          v-for="useCase in fullContent.useCasesExamples"
-          :key="useCase"
-        >
-          <img
-            src="@/assets/content-icons/bulb.svg"
-            height="20"
-            width="20"
-          />
-          <div
-            v-html="useCase"
-            class="list-text"
-          />
+        <li v-for="useCase in fullContent.useCasesExamples" :key="useCase">
+          <img src="@/assets/content-icons/bulb.svg" height="20" width="20" />
+          <div v-html="useCase" class="list-text" />
         </li>
       </ul>
 
-      <p
-        class="content-subtitle content-subtitle--references"
-        v-if="fullContent.references && fullContent.references.length > 0"
-      >
+      <p class="content-subtitle content-subtitle--references"
+        v-if="fullContent.references && fullContent.references.length > 0">
         Referências
       </p>
-      <ul
-        class="content-list"
-        v-if="fullContent.references && fullContent.references.length > 0"
-      >
-        <li
-          v-for="reference in fullContent.references"
-          :key="reference.name"
-        >
-          <a
-            :href="reference.url"
-            target="_blank"
-            class="list-text list-text--references"
-          >
-            <img
-              src="@/assets/content-icons/link.svg"
-              height="12"
-              width="12"
-            />
+      <ul class="content-list" v-if="fullContent.references && fullContent.references.length > 0">
+        <li v-for="reference in fullContent.references" :key="reference.name">
+          <a :href="reference.url" target="_blank" class="list-text list-text--references">
+            <img src="@/assets/content-icons/link.svg" height="12" width="12" />
             {{ reference.name }}
           </a>
         </li>
@@ -159,6 +96,10 @@ export default {
       }
     });
   },
+  unmounted() {
+    this.lessonInfo = {}
+    this.fullContent = {}
+  }
 };
 </script>
 <style lang="scss">
@@ -170,6 +111,7 @@ export default {
   flex-direction: column;
   margin: 0 auto;
   position: relative;
+  padding: 0 !important;
 
   &__breadcrumb {
     position: sticky;
@@ -180,6 +122,7 @@ export default {
     gap: 8px;
     padding: calc(var(--size) / 2);
     z-index: 2;
+
     a {
       text-decoration: none;
     }
@@ -198,6 +141,7 @@ export default {
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
     position: relative;
+
     img:not(.cover-icon) {
       width: 100%;
       height: 100%;
@@ -227,6 +171,7 @@ export default {
         font-size: 18px;
         margin-bottom: 8px;
         margin-top: 40px;
+
         &--references {
           font-size: 14px;
         }
@@ -283,14 +228,17 @@ export default {
       }
     }
   }
+
   @media (max-width: $mobile) {
     width: 100%;
+
     &__content {
       padding: 30px;
     }
 
     &__cover {
       height: 200px;
+
       .cover-icon {
         left: 30px;
       }
