@@ -65,7 +65,7 @@
             para jogar.
         </p>
 
-        <div class="about__animation-display">
+        <div class="about__animation-display" v-if="animations.length > 0">
             <div class="piece-animation" v-for="animation, index in animations" :key="index">
                 <div class="piece-animation__button"
                     :class="{ 'piece-animation__button--inactive': animation.wasSeen }">
@@ -149,9 +149,7 @@ export default {
             horizontalRight,
             verticalUp,
             verticalDown,
-            animations: [
-                { animation: verticalUp, array: "[1, 5, 9, 2]", wasSeen: false }, { animation: horizontalRight, array: '[4, 5, 6, 10]', wasSeen: false, }, { animation: verticalDown, array: '[1, 5, 9, 8]', wasSeen: false }, { animation: horizontalLeft, array: '[4, 8, 9, 10]', wasSeen: false }
-            ],
+            animations: [],
             gistId: '3bf7a48e1f33fcf62df92d9aa862f01f',
             piecesDisplay: [
                 {
@@ -183,6 +181,9 @@ export default {
                 id: this.gistId,
             });
         }
+
+        this.animations = [{ animation: verticalUp, array: "[1, 5, 9, 2]", wasSeen: false }, { animation: horizontalRight, array: '[4, 5, 6, 10]', wasSeen: false, }, { animation: verticalDown, array: '[1, 5, 9, 8]', wasSeen: false }, { animation: horizontalLeft, array: '[4, 8, 9, 10]', wasSeen: false }]
+
     },
     methods: {
         playAnimation(animationName) {

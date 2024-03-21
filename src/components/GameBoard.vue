@@ -171,6 +171,15 @@ export default {
       },
       deep: true,
     },
+    "store.isGameRunning": {
+      handler(newVal) {
+        if (newVal) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "auto";
+        }
+      }
+    }
   },
   mounted() {
     this.random = Math.floor(Math.random() * this.thePieces.length);
@@ -510,6 +519,7 @@ export default {
     padding: 16px;
     gap: 12px;
     grid-template-areas: "game-board-header game-board-header" "stats stats" "grid actions" "grid preview";
+    grid-template-columns: min-content 50px;
     background: transparent;
 
     .board-animation {
@@ -610,8 +620,8 @@ export default {
     grid-area: preview-grid;
 
     div {
-      height: var(--piece-size);
-      width: var(--piece-size);
+      height: var(--preview-piece-size);
+      width: var(--preview-piece-size);
       border: 1px solid white;
       box-sizing: border-box;
       background: none;

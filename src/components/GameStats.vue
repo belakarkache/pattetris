@@ -83,7 +83,7 @@ export default {
 
         h3 {
           margin: 0;
-          font-size: clamp(12px, 1.3vw, 20px);
+          font-size: clamp(12px, 1.3vw, 18px);
           font-weight: 600;
         }
 
@@ -107,8 +107,8 @@ export default {
       box-shadow: var(--inner-shadow);
       padding: 8px;
       border-radius: 10px;
-      width: 48px;
-      height: 48px;
+      width: var(--size);
+      height: var(--size);
       display: grid;
       place-items: center;
 

@@ -29,10 +29,11 @@ img {
   --hl-green: #0e771f;
   --hl-yellow: #775900;
   --hl-purple: #2e3269;
-  --piece-size: clamp(24px, 5.4vw, 28px);
+  --piece-size: clamp(22px, 5.4vw, 26px);
+  --preview-piece-size: clamp(14px, 5.4vw, 26px);
   --grid-height: calc(var(--piece-size) * 20);
   --grid-width: calc(var(--piece-size) * 10);
-  --preview-grid-size: calc(var(--piece-size) * 4);
+  --preview-grid-size: calc(var(--preview-piece-size) * 4);
   --piece-border-radius: clamp(4px, 0.5vw, 6px);
   --inner-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, 0.07);
 }
@@ -61,7 +62,7 @@ body {
 }
 
 .title {
-  font-size: clamp(14px, 1.3vw, 22px);
+  font-size: clamp(14px, 1.3vw, 20px);
   font-weight: 700;
   margin: 0;
 }

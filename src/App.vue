@@ -82,7 +82,8 @@ export default {
       margin-left: 0;
     }
 
-    @media (max-width: $min) {
+    @media (max-width: $min),
+    (max-height: $min-height) {
       display: none;
     }
 
@@ -106,7 +107,8 @@ export default {
       max-width: 100%;
     }
 
-    @media (max-width: $min) {
+    @media (max-width: $min),
+    (max-height: $min-height) {
       display: flex;
     }
   }

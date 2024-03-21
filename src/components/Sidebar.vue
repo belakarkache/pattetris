@@ -74,6 +74,11 @@ export default {
   top: 0;
   right: unset;
 
+  @media (max-width: $min),
+  (max-height: $min-height) {
+    display: none;
+  }
+
   .logo {
     margin-left: 8px;
     margin-top: 80px;
