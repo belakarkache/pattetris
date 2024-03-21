@@ -72,6 +72,7 @@ main {
     padding: 4px 20px !important;
     flex-direction: column;
     justify-content: flex-start;
+    background-color: white;
   }
 }
 </style>

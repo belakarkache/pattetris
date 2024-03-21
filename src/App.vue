@@ -63,6 +63,11 @@ export default {
 #app {
   width: 100%;
 
+  @media (max-width: $mobile) {
+    height: 100vh;
+    background-color: white;
+  }
+
   .app-wrapper {
     display: flex;
     gap: calc(var(--size) / 2);

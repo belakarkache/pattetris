@@ -549,8 +549,8 @@ export default {
     border-radius: var(--piece-border-radius);
 
     @media (max-width: $mobile) {
-      border-color: var(--background);
-      background: white;
+      border-color: white;
+      background: var(--background);
     }
   }
 }
@@ -628,7 +628,7 @@ export default {
       border-radius: var(--piece-border-radius);
 
       @media (max-width: $mobile) {
-        border-color: var(--background);
+        border-color: white;
       }
     }
   }
