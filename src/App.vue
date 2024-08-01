@@ -72,6 +72,10 @@ export default {
     width: fit-content;
     height: fit-content;
     background-color: var(--background);
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
     a {
       font-size: 12px;
       text-decoration: underline;
