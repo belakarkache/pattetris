@@ -17,6 +17,10 @@
         <component :is="Component" />
       </transition>
     </router-view>
+
+    <div class="copyright">
+      developed by <a href="https://www.icka.dev/" target="_blank">icka.dev</a>
+    </div>
   </div>
 </template>
 
@@ -62,6 +66,18 @@ export default {
 <style lang="scss">
 #app {
   width: 100%;
+
+  .copyright {
+    padding: 6px;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--background);
+    a {
+      font-size: 12px;
+      text-decoration: underline;
+      color: var(--dark-blue);
+    }
+  }
 
   @media (max-width: $mobile) {
     height: 100vh;
