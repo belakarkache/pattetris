@@ -146,6 +146,27 @@ const linesLeftText = computed(() => {
   }
 
   @media (max-width: 480px) {
+    container-type: inline-size;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 4px 8px;
+
+    &__score {
+      grid-column: 1 / -1;
+    }
+
+    &__value--big {
+      font-size: min(var(--text-lg), 24cqi);
+    }
+
+    &__row {
+      align-self: center;
+    }
+
+    .meter {
+      grid-column: auto;
+    }
+
     &__score .hud__label {
       position: absolute;
       width: 1px;
