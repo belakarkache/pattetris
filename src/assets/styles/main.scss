@@ -1,0 +1,211 @@
+:root {
+  --ink: #282451;
+  --ink-soft: rgb(40 36 81 / 0.68);
+  --ink-faint: rgb(40 36 81 / 0.42);
+  --on-pastel: #282451;
+  --paper: #eff2f7;
+  --surface: #ffffff;
+  --well: #eff2f7;
+  --line: #e1e5ef;
+  --scrim: rgb(40 36 81 / 0.32);
+
+  --pink: #f2a0d5;
+  --lilac: #bdc0f2;
+  --sky: #a7ddf2;
+  --mint: #aef2b9;
+  --butter: #f2d57e;
+  --peach: #f7be96;
+  --periwinkle: #9db4f0;
+  --hot: #f869c5;
+  --hot-soft: #ffedf9;
+
+  --bevel: inset -2px 2px 0 rgb(255 255 255 / 0.5), inset 2px -2px 0 rgb(0 0 0 / 0.1);
+  --r-cell: 5px;
+  --r-key: 12px;
+  --r-panel: 24px;
+  --focus: 0 0 0 3px var(--surface), 0 0 0 6px var(--hot);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font: "Rubik", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: clamp(2.25rem, 6vw, 3.25rem);
+
+  --header-height: 64px;
+  --gutter: clamp(16px, 4vw, 40px);
+
+  color-scheme: light;
+}
+
+@media (max-width: 640px), (max-height: 500px) {
+  :root {
+    --header-height: 52px;
+  }
+}
+
+@mixin dark-tokens {
+  --ink: #eceefb;
+  --ink-soft: rgb(236 238 251 / 0.72);
+  --ink-faint: rgb(236 238 251 / 0.45);
+  --paper: #16143a;
+  --surface: #211e4b;
+  --well: #2b2860;
+  --line: #34306c;
+  --scrim: rgb(10 8 36 / 0.55);
+  --hot-soft: #3a2560;
+  --bevel: inset -2px 2px 0 rgb(255 255 255 / 0.45), inset 2px -2px 0 rgb(0 0 0 / 0.14);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-tokens;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include dark-tokens;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.rainbow-text {
+  background-image: linear-gradient(90deg, var(--lilac), var(--pink), var(--butter), var(--sky), var(--lilac));
+  background-size: 200% 100%;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.piece-i { --c: var(--sky); }
+.piece-j { --c: var(--periwinkle); }
+.piece-l { --c: var(--peach); }
+.piece-o { --c: var(--butter); }
+.piece-s { --c: var(--mint); }
+.piece-t { --c: var(--lilac); }
+.piece-z { --c: var(--pink); }
+
+.tone-pink { --tone: var(--pink); }
+.tone-sky { --tone: var(--sky); }
+.tone-lilac { --tone: var(--lilac); }
+.tone-mint { --tone: var(--mint); }
+.tone-butter { --tone: var(--butter); }
+
+.block {
+  border-radius: var(--r-cell);
+  background: var(--c, var(--well));
+  box-shadow: var(--bevel);
+}
+
+@keyframes block-fly {
+  0% {
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.4, 1);
+  }
+  35% {
+    translate: calc(var(--dx) * 0.45) var(--rise);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5);
+  }
+  100% {
+    translate: var(--dx) var(--fall);
+    rotate: var(--spin);
+    scale: 0.35;
+    opacity: 0;
+  }
+}
